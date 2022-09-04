@@ -4,6 +4,7 @@ import Register from './screens/auth/register'
 import Login from './screens/auth/login'
 import NotesIndex from './screens/notes/index'
 import UserEdit from './screens/users/edit'
+import PrivateRoute from "./components/auth/private_route";
 
 export default function AppRoutes() {
   return (
@@ -12,8 +13,8 @@ export default function AppRoutes() {
         <Route path='/' element={<Home />} />
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/notes' element={<NotesIndex />} />
-        <Route path='/users/edit' element={<UserEdit />} />
+        <Route path='/notes' element={<PrivateRoute component={<NotesIndex />} />} />
+        <Route path='/users/edit' element={<PrivateRoute component={<UserEdit />} />} />
       </Routes>
     </BrowserRouter>
   )
