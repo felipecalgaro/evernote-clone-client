@@ -1,24 +1,34 @@
-import React, { Fragment, useState } from 'react';
-import { Button, Field, Control, Input, Column, Help } from "rbx";
+import React, { Fragment, useState, useEffect } from 'react';
+import { Button, Field, Control, Input, Column, Help, Label } from "rbx";
 import { useNavigate } from "react-router-dom";
+import UsersService from '../../../services/users';
 
 function RegisterForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [redirectToLogin, setRedirectToLogin] = useState(false);
   const [error, setError] = useState(false);
 
   const navigate = useNavigate()
 
-  redirectToLogin && navigate('/login')
+  async function handleSubmit(e) {
+    e.preventDefault()
+
+    try {
+      const user = await UsersService.register({ name, email, password })
+      navigate('/login')
+    } catch (error) {
+      setError(true)
+    }
+  }
 
   return (
     <Fragment>
       <Column.Group centered>
-        <form>
+        <form onSubmit={handleSubmit}>
           <Column size={12}>
             <Field>
+              <Label size="small">Name:</Label>
               <Control>
                 <Input
                   type="name"
@@ -30,6 +40,7 @@ function RegisterForm() {
               </Control>
             </Field>
             <Field>
+              <Label size="small">Email:</Label>
               <Control>
                 <Input
                   type="email"
@@ -41,6 +52,7 @@ function RegisterForm() {
               </Control>
             </Field>
             <Field>
+              <Label size="small">Password:</Label>
               <Control>
                 <Input
                   type="password"
@@ -55,10 +67,10 @@ function RegisterForm() {
               <Control>
                 <Column.Group breakpoint='mobile'>
                   <Column>
-                    <a onClick={e => setRedirectToLogin(true)} className="button is-white has-text-custom-purple">Login or</a>
+                    <Button color="custom-purple" outlined>Register</Button>
                   </Column>
                   <Column>
-                    <Button color="custom-purple" outlined>Register</Button>
+                    <a onClick={() => navigate('/login')} className="button is-white has-text-custom-purple">Login</a>
                   </Column>
                 </Column.Group>
               </Control>
