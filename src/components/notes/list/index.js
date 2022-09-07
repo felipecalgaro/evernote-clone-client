@@ -11,10 +11,15 @@ function ListNotes(props) {
             {props.notes.length} Notes
           </Title>
         </Column>
+        <Column size={2}>
+          <Button state="active" color="custom-purple" outlined size="small" onClick={() => props.createNote()}>
+            Notes +
+          </Button>
+        </Column>
       </Column.Group>
       <List className="notes-list">
         {props.notes.map((item, key) =>
-          <List.Item key={key} onClick={() => props.selectNote(item._id)} active={item === props.current_note}>
+          <List.Item key={key} onClick={() => props.selectNote(item._id)} active={item === props.currentNote}>
             <Title size={6}>
               {item.title.replace(/(<([^>]+)>)/ig, "").substring(0, 15)}
             </Title>
