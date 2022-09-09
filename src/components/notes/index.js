@@ -4,6 +4,7 @@ import "../../styles/notes.scss";
 import { push as Menu } from 'react-burger-menu'
 import List from "../notes/list";
 import Editor from "../notes/editor";
+import Search from "../notes/search";
 import NotesService from '../../services/notes';
 
 function Notes(props) {
@@ -27,6 +28,11 @@ function Notes(props) {
   const createNote = async (params) => {
     const note = await NotesService.create();
     fetchNotes();
+  }
+
+  const searchNotes = async (query) => {
+    const response = await NotesService.search(query)
+    setNotes(response.data)
   }
 
   const selectNote = (id) => {
@@ -64,7 +70,7 @@ function Notes(props) {
         >
           <Column.Group>
             <Column size={10} offset={1}>
-              Search...
+              <Search searchNotes={searchNotes} fetchNotes={fetchNotes} />
             </Column>
           </Column.Group>
           <List
