@@ -3,6 +3,7 @@ import { Column, Section, Title, Container, Card, Button } from "rbx";
 import "../../../styles/users.scss";
 import HeaderLogged from "../../../components/header_logged";
 import UsersEditForm from '../../../components/users/user_edit_form';
+import UsersEditPasswordForm from '../../../components/users/user_edit_password_form';
 
 const UserEdit = () => (
   <Fragment>
@@ -29,7 +30,7 @@ const UserEdit = () => (
             </Title>
             <Card>
               <Card.Content>
-                Users Edit Password Form...
+                <UsersEditPasswordForm />
               </Card.Content>
             </Card>
           </Column>
