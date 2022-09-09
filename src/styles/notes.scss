@@ -10,9 +10,17 @@
 .bm-menu {
   background: white;
   padding-top: 10px;
-  // padding-left: 20px;
 }
 
 .list-item.is-active {
   background-color: $custom-grey-lighter
+}
+
+.notes-editor {
+  padding: 0;
+  height: calc(100% - 43px);
+
+  .quill {
+    height: 100%;
+  }
 }
